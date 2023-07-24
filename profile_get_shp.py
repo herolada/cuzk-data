@@ -4,7 +4,7 @@ import zipfile
 from urllib.parse import urlencode
 from urllib.request import urlretrieve
 
-from shp_visualize import line_visualize
+from visualize import line_visualize
 
 
 base_url = "https://ags.cuzk.cz/arcgis2/rest/services/Profile_DMR5G/GPServer/ProfileDMR5G/submitJob"
@@ -90,7 +90,7 @@ while True:
         time.sleep(5)
 
     if time.time() - start_t >= 300:
-        print("Job did not get done in under 300 s. Terminating.")
+        raise TimeoutError("Job did not get done in under 300 s. Terminating.")
 
 
 with zipfile.ZipFile("result.zip", 'r') as zip_ref:
